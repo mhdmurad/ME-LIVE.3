@@ -12,6 +12,12 @@ const allChannels = [
   url: "https://s1.itcnbd.live/united-sports-1/index.m3u8",
   group: "Sports"
 },
+{
+  name: "beIN Sport",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhXse2cgIuVSVKEqzxp4g4aEV2GZUO7RIO-oHA1TKMIQ&s=10",
+  url: "https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8",
+  group: "Sports"
+},
 
 {
   name: "T Sports",
