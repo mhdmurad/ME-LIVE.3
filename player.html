@@ -128,11 +128,18 @@
     if(url){
       const decodedUrl = decodeURIComponent(url);
 
-      if(Hls.isSupported()){
-        const hls = new Hls();
+// Cloudflare Worker Proxy
+const proxy = "https://melive.bangladeshmdmurat23.workers.dev/?url=";
+const playUrl = proxy + encodeURIComponent(decodedUrl);
 
-        hls.loadSource(decodedUrl);
-        hls.attachMedia(video);
+if(Hls.isSupported()){
+  const hls = new Hls({
+    enableWorker: true,
+    lowLatencyMode: true,
+    backBufferLength: 90
+  });
+
+  hls.loadSource(playUrl);
 
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
           video.play().catch(()=>{});
