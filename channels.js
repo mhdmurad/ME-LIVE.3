@@ -43,7 +43,57 @@ const allChannels = [
 {
   name: "GTV",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR17nZHFF6RRi0spgrD5MyEW577mND1XNi7hR_ZRJ3-41sVTXEFJhDofezG&s=10",
-  url: "https://s2.itcnbd.live/gtv/index.m3u8",
+const allChannels = [
+{
+  name: "United Sports 2",
+  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  url: "https://andro.226503.xyz/checklist/androstreamliveexn2.m3u8",
+  group: "Sports"
+},
+
+{
+  name: "D SPORT",
+  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  url: "https://1nyaler.streamhostingcdn.top/stream/106/index.m3u8",
+  group: "Sports"
+},
+{
+  name: "beIN Sport",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhXse2cgIuVSVKEqzxp4g4aEV2GZUO7RIO-oHA1TKMIQ&s=10",
+  url: "https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8",
+  group: "Sports"
+},
+
+{
+  name: "T Sports",
+  logo: "https://itcnbd.live/images/95357b2f224dabfec27bf87dffb952b2.png",
+  url: "https://tv.emnetbd.com/flussonic/Tsports1/tracks-v1a1/mono.m3u8",
+  group: "Sports"
+},
+
+{
+  name: "T TV Sports HD",
+  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  url: "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index_7.m3u8",
+  group: "Sports"
+},
+{
+  name: "BTV",
+  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
+  group: "Sports"
+},
+{
+  name: "Eurosport",
+  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  url: "https://s1.itcnbd.live/1-eurosport/index.m3u8",
+  group: "Sports"
+},
+
+{
+  name: "GTV",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR17nZHFF6RRi0spgrD5MyEW577mND1XNi7hR_ZRJ3-41sVTXEFJhDofezG&s=10",
+  url: "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/gazibdz.stream/tracks-v1a1/mono.m3u8",
   group: "Bangla"
 },
 
@@ -113,7 +163,7 @@ const allChannels = [
 {
   name: "STAR JALSHA HD",
   logo: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Star_Jalsha_logo_2023.png",
-  url: "https://s2.itcnbd.live/star-jalsha-hd/index.m3u8",
+  url: "https://yupptvcatchupire.yuppcdn.net/preview/starjalsha/1800.m3u8",
   group: "Entertainment"
 },
 
@@ -127,21 +177,21 @@ const allChannels = [
 {
   name: "ZEE BANGLA HD",
   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Z_Bangla_logo.jpg/500px-Z_Bangla_logo.jpg",
-  url: "https://s2.itcnbd.live/zee-bangla-hd/index.m3u8",
+  url: "https://yupptvcatchupire.yuppcdn.net/preview/zeebangla/2500.m3u8",
   group: "Entertainment"
 },
 
 {
   name: "COLORS BANGLA HD",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpMjCfUm68FoC7rKtBhuAGt1HRqUfM3TxLhUSEdKITHA&s=10",
-  url: "https://s2.itcnbd.live/colors-bangla-hd/index.m3u8",
+  url: "https://yupptvcatchupire.yuppcdn.net/preview/colorsbanglahd/800.m3u8?hdnts=",
   group: "Entertainment"
 },
 
 {
   name: "SONY AAT",
   logo: "https://itcnbd.live/images/SONY AAT1745041124.jpg",
-  url: "https://s2.itcnbd.live/sony-aat/index.m3u8",
+  url: "http://192.101.68.26/CF5A68754DHEZZZZZ65698824b2f4bf69c339d68bbe8/tracks-v1a1/2026/06/29/10/11/13-06000.ts?token=44c8a1ddbb1bdf0c1b09065145a937f1",
   group: "Entertainment"
 },
 
@@ -274,7 +324,7 @@ const allChannels = [
 {
   name: "LOVE NATURE",
   logo: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Love_Nature_logo_%282025%29.svg",
-  url: "https://s2.itcnbd.live/love-nature/index.m3u8",
+  url: "https://cdn1.logichost.in/ajmantv/live/playlist.m3u8",
   group: "Documentary"
 },
 ];
