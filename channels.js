@@ -1,15 +1,21 @@
 const allChannels = [
 {
   name: "United Sports 2",
-  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
   url: "https://andro.226503.xyz/checklist/androstreamliveexn2.m3u8",
   group: "Sports"
 },
 
 {
   name: "D SPORT",
-  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
   url: "https://1nyaler.streamhostingcdn.top/stream/106/index.m3u8",
+  group: "Sports"
+},
+{
+  name: "FOOTBALL",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
+  url: "https://live.teleradiocom.tj/8/3m.m3u8",
   group: "Sports"
 },
 {
@@ -21,30 +27,59 @@ const allChannels = [
 
 {
   name: "T Sports",
-  logo: "https://itcnbd.live/images/95357b2f224dabfec27bf87dffb952b2.png",
-  url: "https://tv.emnetbd.com/flussonic/Tsports1/tracks-v1a1/mono.m3u8",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
+  url: "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
   group: "Sports"
 },
 
 {
   name: "T TV Sports HD",
-  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
   url: "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index_7.m3u8",
   group: "Sports"
-},
+}, 
 {
-  name: "BTV",
-  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
-  url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
+  name: "FIFA 2026 ARBIC",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
+  url: "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
   group: "Sports"
 },
 {
-  name: "Eurosport",
-  logo: "https://itcnbd.live/images/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
-  url: "https://s1.itcnbd.live/1-eurosport/index.m3u8",
+  name: "TR SPORT",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiPgy6093KphJTPXUmyJANd3kZPkHhdu9bFJPz43ZBFau-RhttCYVfQk4&s=10",
+  url: "https://livetr.teleromagna.it/mia/live/playlist.m3u8",
+  group: "Sports"
+}, 
+{
+  name: "FIFA 2026",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiPgy6093KphJTPXUmyJANd3kZPkHhdu9bFJPz43ZBFau-RhttCYVfQk4&s=10",
+  url: "https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8",
+  group: "Sports"
+}, 
+{
+  name: "FIFA 2026",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiPgy6093KphJTPXUmyJANd3kZPkHhdu9bFJPz43ZBFau-RhttCYVfQk4&s=10",
+  url: "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg02873-kravemedia-mtrspt1-distrotv/playlist.m3u8",
   group: "Sports"
 },
-
+{
+  name: "Enter 10 Bangla",
+  logo: "https://static.wikia.nocookie.net/etv-gspn-bangla/images/4/4c/Enterr10_Bangla_logo_%282020%29.png/revision/latest?cb=20210422035753",
+  url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9l3CospNm55oEn0V7oc67JGpBwq5_qKfK5Xtnhfpm0WQXls0kfvpNyc&s=10",
+  group: "Sports"
+}, 
+{
+  name: "Sony Aath",
+  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWR3iDeYuWx1e-Ta5PWT1PT8wQ6LuLpG9ds_tPcdo2g&s",
+  url: "https://live20.bozztv.com/giatvplayout7/giatv-209611/index.m3u8",
+  group: "Sports"
+},
+{
+  name: "Cartoon Network",
+  logo: "https://upload.wikimedia.org/wikipedia/commons/8/80/Cartoon_Network_2010_logo.svg",
+  url: "https://live20.bozztv.com/giatvplayout7/giatv-209624/index.m3u8",
+  group: "Sports"
+},
 {
   name: "GTV",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR17nZHFF6RRi0spgrD5MyEW577mND1XNi7hR_ZRJ3-41sVTXEFJhDofezG&s=10",
