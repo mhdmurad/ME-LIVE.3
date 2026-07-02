@@ -76,12 +76,8 @@ showChannels(allChannels);
 return;
 }
 
-const result=allChannels.filter(c=>
-c.category.toLowerCase()===cat
-);
+const result = allChannels.filter(c => {
+    if (!c.group) return false;
 
-showChannels(result);
-
-};
-
+    return c.group.toLowerCase().includes(cat);
 });
