@@ -9,7 +9,7 @@ const allChannels = [
 {
   name: "D SPORT",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
-  url: "https://1nyaler.streamhostingcdn.top/stream/106/index.m3u8",
+  url: "https://1nyaler.streamhostingcdn.top/stream/89/index.m3u8",
   group: "Sports"
 },
 {
