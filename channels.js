@@ -2,7 +2,7 @@ const allChannels = [
 {
   name: "United Sports 2",
   logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUD6cfenW-4T2bpfkSk4QCrShs5zJvGkpHWqPE359gvs0WIgZSH87H4f4&s=10",
-  url: "https://andro.226503.xyz/checklist/androstreamliveexn2.m3u8",
+  url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8",
   group: "Sports"
 },
 
