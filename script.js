@@ -2,82 +2,82 @@ showChannels(allChannels);
 
 function showChannels(list){
 
-let html = `<div class="channel-grid">`;
+    let html = `<div class="channel-grid">`;
 
-list.forEach(ch=>{
+    list.forEach(ch=>{
 
-html += `
-<div class="channel-card">
+        html += `
+        <div class="channel-card">
 
-<img
-class="channel-logo"
-src="${ch.logo}"
-loading="lazy"
-onerror="this.src='https://via.placeholder.com/100?text=TV'">
+            <img
+            class="channel-logo"
+            src="${ch.logo}"
+            loading="lazy"
+            onerror="this.src='https://via.placeholder.com/100?text=TV'">
 
-<div class="channel-name">
-${ch.name}
-</div>
+            <div class="channel-name">
+                ${ch.name}
+            </div>
 
-<button
-class="live-btn"
-onclick="playChannel('${encodeURIComponent(ch.url)}','${encodeURIComponent(ch.name)}')">
+            <button
+            class="live-btn"
+            onclick="playChannel('${encodeURIComponent(ch.url)}','${encodeURIComponent(ch.name)}')">
+            ▶ LIVE
+            </button>
 
-▶ LIVE
+        </div>
+        `;
 
-</button>
+    });
 
-</div>
-`;
+    html += `</div>`;
 
-});
-
-html += `</div>`;
-
-document.getElementById("channels").innerHTML = html;
+    document.getElementById("channels").innerHTML = html;
 
 }
 
 function playChannel(url,name){
 
-window.location.href =
-"player.html?url="+url+"&name="+name;
+    window.location.href =
+    "player.html?url="+url+"&name="+name;
 
 }
 
-document
-.getElementById("searchBox")
-.addEventListener("keyup",function(){
+document.getElementById("searchBox").addEventListener("keyup",function(){
 
-const value=this.value.toLowerCase();
+    const value=this.value.toLowerCase();
 
-const result=allChannels.filter(c=>
-c.name.toLowerCase().includes(value)
-);
+    const result=allChannels.filter(c=>
+        c.name.toLowerCase().includes(value)
+    );
 
-showChannels(result);
+    showChannels(result);
 
 });
 
-document.querySelectorAll(".category-bar button")
-.forEach(btn=>{
+document.querySelectorAll(".category-bar button").forEach(btn=>{
 
-btn.onclick=function(){
+    btn.onclick=function(){
 
-document.querySelectorAll(".category-bar button")
-.forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll(".category-bar button")
+        .forEach(b=>b.classList.remove("active"));
 
-this.classList.add("active");
+        this.classList.add("active");
 
-const cat=this.innerText.toLowerCase();
+        const cat=this.innerText.toLowerCase();
 
-if(cat==="all"){
-showChannels(allChannels);
-return;
-}
+        if(cat==="all"){
+            showChannels(allChannels);
+            return;
+        }
 
-const result = allChannels.filter(c => {
-    if (!c.group) return false;
+        const result=allChannels.filter(c=>
+            c.group &&
+            c.group.toLowerCase().includes(cat)
+        );
 
-    return c.group.toLowerCase().includes(cat);
+        showChannels(result);
+
+    };
+
 });
