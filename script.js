@@ -1,13 +1,329 @@
-showChannels(allChannels);
+// ===============================
+// ME LIVE v3 - Part 1
+// ===============================
 
-function showChannels(list){
+const playlist =
+"https://raw.githubusercontent.com/shouravoo8/Tv-Channels-Network/refs/heads/main/TvChannelsnetwork.m3u";
+
+let allChannels = [];
+let currentCategory = "All";
+let categories = [];
+
+// Loading
+document.getElementById("channels").innerHTML =
+"<h3 style='color:white;padding:20px'>Loading...</h3>";
+
+
+// ===============================
+// AUTO CATEGORY
+// ===============================
+
+function getCategory(name){
+
+    name = name.toLowerCase();
+
+    // News
+    if(
+        name.includes("ekattor") ||
+        name.includes("somoy") ||
+        name.includes("jamuna") ||
+        name.includes("independent") ||
+        name.includes("channel 24") ||
+        name.includes("news24") ||
+        name.includes("dbc") ||
+        name.includes("atn news") ||
+        name.includes("banglavision") ||
+        name.includes("rtv") ||
+        name.includes("ntv")
+    ){
+        return "News";
+    }
+
+    // Sports
+    if(
+        name.includes("sports") ||
+        name.includes("t sports") ||
+        name.includes("tsports") ||
+        name.includes("star sports") ||
+        name.includes("sony sports") ||
+        name.includes("ten") ||
+        name.includes("bein") ||
+        name.includes("espn") ||
+        name.includes("eurosport")
+    ){
+        return "Sports";
+    }
+
+    // Movies
+    if(
+        name.includes("movie") ||
+        name.includes("movies") ||
+        name.includes("cinema") ||
+        name.includes("sony max") ||
+        name.includes("star movies") ||
+        name.includes("zee cinema")
+    ){
+        return "Movies";
+    }
+
+    // Entertainment
+    if(
+        name.includes("zee") ||
+        name.includes("star jalsha") ||
+        name.includes("colors") ||
+        name.includes("sony") ||
+        name.includes("channel i") ||
+        name.includes("gazi") ||
+        name.includes("nagorik")
+    ){
+        return "Entertainment";
+    }
+
+    // Kids
+    if(
+        name.includes("cartoon") ||
+        name.includes("pogo") ||
+        name.includes("nick") ||
+        name.includes("disney")
+    ){
+        return "Kids";
+    }
+
+    // Music
+    if(
+        name.includes("music") ||
+        name.includes("9xm") ||
+        name.includes("mtv")
+    ){
+        return "Music";
+    }
+
+    return "Others";
+}
+
+
+// ===============================
+// LOAD PLAYLIST
+// ===============================
+
+fetch(playlist)
+.then(r => r.text())
+.then(data => {
+
+    let lines = data.split("\n");
+    let channels = [];
+        for (let i = 0; i < lines.length; i++) {
+
+        if (lines[i].startsWith("#EXTINF")) {
+
+            let ext = lines[i];
+
+            let name = ext.split(",")[1]?.trim() || "Unknown";
+
+            let logoMatch = ext.match(/tvg-logo="(.*?)"/);
+
+            let logo = logoMatch && logoMatch[1]
+    ? logoMatch[1]
+    : "https://raw.githubusercontent.com/mhdmurad/logo/main/file_000000001b38722fb3d3118c5605fb7b.png";
+
+            let url = (lines[i + 1] || "").trim();
+
+            let category = getCategory(name);
+
+            if (url && !url.startsWith("#")) {
+
+                channels.push({
+                    name: name,
+                    logo: logo,
+                    url: url,
+                    category: category
+                });
+
+                if (!categories.includes(category)) {
+                    categories.push(category);
+                }
+
+            }
+
+        }
+
+    }
+
+    // =========================
+    // CUSTOM CHANNELS
+    // =========================
+
+    const customChannels = [
+
+        {
+            name: "T Sports 1",
+            logo: "https://via.placeholder.com/100?text=T+Sports",
+            url: "https://trs1.aynaott.com/tsports/index.m3u8"
+        },
+
+        {
+            name: "Bein Sports 4 Arabic",
+            logo: "https://via.placeholder.com/100?text=BeIN",
+            url: "https://cp11.adabmedia.com/hls2/sport.m3u8?nocache=1782057214460"
+        },
+
+        {
+            name: "Bioscope FIFA",
+            logo: "https://via.placeholder.com/100?text=FIFA",
+            url: "https://sm-monirul.top/ott/bioscope/index.m3u8"
+        },
+
+        {
+            name: "DAZN 1",
+            logo: "https://via.placeholder.com/100?text=DAZN",
+            url: "https://znty.dyndns.org:5010/hls/eleven1.m3u8"
+        },
+
+        {
+            name: "Caze TV BR",
+            logo: "https://via.placeholder.com/100?text=Caze",
+            url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/1080p-vtt/index.m3u8"
+        },
+
+        {
+            name: "beIN Sport",
+            logo: "https://via.placeholder.com/100?text=beIN",
+            url: "https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8"
+        }
+
+    ];
+customChannels.forEach(ch => {
+
+    ch.category = getCategory(ch.name);
+
+    channels.push(ch);
+
+    if (!categories.includes(ch.category)) {
+        categories.push(ch.category);
+    }
+
+});
+
+allChannels = channels;
+
+categories.sort();
+
+renderCategories();
+
+const savedCategory = localStorage.getItem("selectedCategory");
+
+if (savedCategory && savedCategory !== "All") {
+
+    currentCategory = savedCategory;
+
+    const btn = [...document.querySelectorAll(".cat-btn")]
+        .find(b => b.textContent.trim() === savedCategory);
+
+    filterCategory(savedCategory, btn);
+
+} else {
+
+    showChannels(allChannels);
+
+}
+
+})
+.catch(() => {
+
+    document.getElementById("channels").innerHTML =
+    "<h3 style='color:red;padding:20px'>Failed to load playlist</h3>";
+
+});
+        // ===============================
+// CATEGORY BAR
+// ===============================
+
+function renderCategories(){
+
+    let html = `
+    <div id="categoryBar" class="category-bar">
+    `;
+
+    html += `
+    <button class="cat-btn active"
+    onclick="filterCategory('All',this)">
+    All
+    </button>
+    `;
+
+    categories.forEach(cat=>{
+
+        html += `
+        <button class="cat-btn"
+        onclick="filterCategory('${cat}',this)">
+        ${cat}
+        </button>
+        `;
+
+    });
+
+    html += `</div>`;
+
+    html += `<div id="channelList"></div>`;
+
+    document.getElementById("channels").innerHTML = html;
+
+}
+
+
+
+// ===============================
+// CATEGORY FILTER
+// ===============================
+
+function filterCategory(category,btn){
+
+    localStorage.setItem("selectedCategory", category);
+
+    document.querySelectorAll(".cat-btn")
+    .forEach(item=>{
+
+        item.classList.remove("active");
+
+    });
+
+    if(btn){
+
+        btn.classList.add("active");
+
+    }
+
+    if(category==="All"){
+
+        showChannels(allChannels);
+
+        return;
+
+    }
+
+    let filtered =
+    allChannels.filter(ch=>{
+
+        return ch.category===category;
+
+    });
+
+    showChannels(filtered);
+
+}
+// ===============================
+// SHOW CHANNELS
+// ===============================
+
+function showChannels(channels){
 
     let html = `<div class="channel-grid">`;
 
-    list.forEach(ch=>{
+    channels.forEach(ch=>{
 
         html += `
-        <div class="channel-card">
+        <div class="channel-card"
+        onclick="openPlayer('${encodeURIComponent(ch.url)}','${encodeURIComponent(ch.name)}')">
 
             <img
             class="channel-logo"
@@ -19,12 +335,6 @@ function showChannels(list){
                 ${ch.name}
             </div>
 
-            <button
-            class="live-btn"
-            onclick="playChannel('${encodeURIComponent(ch.url)}','${encodeURIComponent(ch.name)}')">
-            ▶ LIVE
-            </button>
-
         </div>
         `;
 
@@ -32,52 +342,46 @@ function showChannels(list){
 
     html += `</div>`;
 
-    document.getElementById("channels").innerHTML = html;
+    document.getElementById("channelList").innerHTML = html;
 
 }
 
-function playChannel(url,name){
+
+// ===============================
+// PLAYER
+// ===============================
+
+function openPlayer(url,name){
 
     window.location.href =
-    "player.html?url="+url+"&name="+name;
+    "player.html?url=" + url + "&name=" + name;
 
 }
 
-document.getElementById("searchBox").addEventListener("keyup",function(){
 
-    const value=this.value.toLowerCase();
+// ===============================
+// SEARCH
+// ===============================
 
-    const result=allChannels.filter(c=>
-        c.name.toLowerCase().includes(value)
-    );
+document.getElementById("searchBox")
+.addEventListener("keyup",function(){
 
-    showChannels(result);
+    let input = this.value.toLowerCase();
 
-});
+    let list = allChannels;
 
-document.querySelectorAll(".category-bar button").forEach(btn=>{
+    if(currentCategory !== "All"){
 
-    btn.onclick=function(){
-
-        document.querySelectorAll(".category-bar button")
-        .forEach(b=>b.classList.remove("active"));
-
-        this.classList.add("active");
-
-        const cat=this.innerText.toLowerCase();
-
-        if(cat==="all"){
-            showChannels(allChannels);
-            return;
-        }
-
-        const result=allChannels.filter(c=>
-            c.group &&
-            c.group.toLowerCase().includes(cat)
+        list = list.filter(ch =>
+            ch.category === currentCategory
         );
 
-        showChannels(result);
+    }
 
-    };
+    list = list.filter(ch =>
+        ch.name.toLowerCase().includes(input)
+    );
+
+    showChannels(list);
 
 });
