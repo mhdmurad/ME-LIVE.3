@@ -15,66 +15,91 @@ async function downloadPlaylists() {
       console.log("Downloading:", url);
       const res = await axios.get(url, { timeout: 15000 });
       all += "\n" + res.data;
-    } catch (err) {
+    } catch {
       console.log("Failed:", url);
     }
   }
 
   return all;
 }
+
 function parseM3U(text) {
   const lines = text.split(/\r?\n/);
-
   const channels = [];
+  const added = new Set();
 
   for (let i = 0; i < lines.length; i++) {
 
-    if (lines[i].startsWith("#EXTINF")) {
+    if (!lines[i].startsWith("#EXTINF")) continue;
 
-      const info = lines[i].trim();
-      const stream = (lines[i + 1] || "").trim();
+    const info = lines[i].trim();
+    const url = (lines[i + 1] || "").trim();
 
-      if (
-        stream &&
-        (stream.startsWith("http://") || stream.startsWith("https://"))
-      ) {
-        channels.push({
-          info,
-          url: stream
-        });
-      }
-
-      i++;
+    if (
+      !url.startsWith("http") ||
+      !url.includes(".m3u8")
+    ) {
+      continue;
     }
 
+    if (added.has(url)) continue;
+
+    added.add(url);
+
+    channels.push({
+      info,
+      url
+    });
+
+    i++;
   }
 
   return channels;
 }
 
-async function checkChannel(url) {
+async function checkChannel(channel) {
 
   try {
 
-    const res = await axios.get(url, {
-      timeout: 8000,
+    const res = await axios.get(channel.url, {
+      timeout: 7000,
       maxRedirects: 5,
-      validateStatus: () => true,
-      responseType: "stream"
+      responseType: "text",
+      validateStatus: () => true
     });
 
-    return res.status >= 200 && res.status < 400;
+    if (res.status < 200 || res.status >= 400)
+      return null;
+
+    const type =
+      (res.headers["content-type"] || "").toLowerCase();
+
+    const body = String(res.data);
+
+    if (
+      body.includes("#EXTM3U") ||
+      body.includes("#EXTINF") ||
+      type.includes("application/vnd.apple.mpegurl") ||
+      type.includes("application/x-mpegurl") ||
+      type.includes("video/")
+    ) {
+      console.log("✓", channel.url);
+      return channel;
+    }
+
+    return null;
 
   } catch {
 
-    return false;
+    return null;
 
   }
 
 }
+
 (async () => {
 
-  console.log("Downloading playlists...");
+  console.log("Downloading Playlists...");
 
   const text = await downloadPlaylists();
 
@@ -83,33 +108,31 @@ async function checkChannel(url) {
   console.log(`Found ${channels.length} channels`);
 
   const active = [];
-  const added = new Set();
 
-  for (const ch of channels) {
+  const batchSize = 30;
 
-    // একই URL একবারই রাখবে
-    if (added.has(ch.url)) continue;
+  for (let i = 0; i < channels.length; i += batchSize) {
 
-    process.stdout.write(`Checking: ${ch.url}\n`);
+    const batch = channels.slice(i, i + batchSize);
 
-    const ok = await checkChannel(ch.url);
+    const result = await Promise.all(
+      batch.map(checkChannel)
+    );
 
-    if (ok) {
-      active.push(ch);
-      added.add(ch.url);
-      console.log("✓ Active");
-    } else {
-      console.log("✗ Inactive");
-    }
+    active.push(...result.filter(Boolean));
+
+    console.log(
+      `Checked ${Math.min(i + batchSize, channels.length)} / ${channels.length}`
+    );
 
   }
 
   let output = "#EXTM3U\n";
 
-  for (const ch of active) {
+  active.forEach(ch => {
     output += ch.info + "\n";
     output += ch.url + "\n";
-  }
+  });
 
   fs.writeFileSync("active.m3u", output, "utf8");
 
