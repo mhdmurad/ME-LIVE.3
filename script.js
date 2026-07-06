@@ -3,7 +3,7 @@
 // ===============================
 
 const playlist =
-"https://raw.githubusercontent.com/shouravoo8/Tv-Channels-Network/refs/heads/main/TvChannelsnetwork.m3u";
+"https://raw.githubusercontent.com/mhdmurad/ME-LIVE.3/refs/heads/main/active.m3u";
 
 let allChannels = [];
 let currentCategory = "All";
