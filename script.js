@@ -157,7 +157,7 @@ fetch(playlist)
     const customChannels = [
 
         {
-            name: "PTV_Sports",
+            name: "PTV Sports",
             logo: "https://en.wikipedia.org/wiki/PTV_Sports",
             url: "http://172.20.21.22/live/skyfeed1015/index.m3u8"
         },
