@@ -3,9 +3,15 @@
 // Playlist + Variables + Category
 // ===============================
 
-const playlist =
-"https://raw.githubusercontent.com/abusaeeidx/Mrgify-BDIX-IPTV/refs/heads/main/playlist.m3u";
+const playlists = [
 
+"https://raw.githubusercontent.com/IPTVFlixBD/OopsTv/refs/heads/main/all-sports.m3u",
+
+"https://raw.githubusercontent.com/abusaeeidx/Mrgify-BDIX-IPTV/refs/heads/main/playlist.m3u",
+
+"https://raw.githubusercontent.com/abusaeeidx/Mrgify-BDIX-IPTV/refs/heads/main/playlist.m3u"
+
+];
 let allChannels = [];
 let currentCategory = "All";
 let categories = [];
@@ -105,7 +111,18 @@ function getCategory(name){
 // LOAD PLAYLIST
 // ===============================
 
-fetch(playlist)
+Promise.all(
+    playlists.map(url =>
+        fetch(url).then(r => r.text())
+    )
+)
+.then(results => {
+
+    const data = results.join("\n");
+
+    // এখান থেকে আপনার আগের parser কোড থাকবে
+
+});
 .then(r => r.text())
 .then(data => {
 
