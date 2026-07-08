@@ -4,7 +4,7 @@
 // ===============================
 
 const playlist =
-"https://raw.githubusercontent.com/mhdmurad/ME-LIVE.3/refs/heads/main/active.m3u";
+"https://raw.githubusercontent.com/abusaeeidx/Mrgify-BDIX-IPTV/refs/heads/main/playlist.m3u";
 
 let allChannels = [];
 let currentCategory = "All";
