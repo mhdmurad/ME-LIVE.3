@@ -157,9 +157,9 @@ fetch(playlist)
     const customChannels = [
 
         {
-            name: "T Sports 1",
-            logo: "https://via.placeholder.com/100?text=T+Sports",
-            url: "https://trs1.aynaott.com/tsports/index.m3u8"
+            name: "PTV_Sports",
+            logo: "https://en.wikipedia.org/wiki/PTV_Sports",
+            url: "http://172.20.21.22/live/skyfeed1015/index.m3u8"
         },
 
         {
