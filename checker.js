@@ -2,7 +2,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 const PLAYLISTS = [
-  "https://raw.githubusercontent.com/shouravoo8/Tv-Channels-Network/refs/heads/main/TvChannelsnetwork.m3u",
+  "https://raw.githubusercontent.com/mhdmurad/ME-LIVE.3/refs/heads/main/checked-working.m3u",
   "https://raw.githubusercontent.com/shouravoo8/Tv-Channels-Network/refs/heads/main/100%25Freash.m3u"
 ];
 
