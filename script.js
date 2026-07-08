@@ -1,5 +1,6 @@
 // ===============================
-// ME LIVE v3 - Part 1
+// ME LIVE v4 - Part 1
+// Playlist + Variables + Category + Auto Logo
 // ===============================
 
 const playlist =
@@ -22,7 +23,6 @@ function getCategory(name){
 
     name = name.toLowerCase();
 
-    // News
     if(
         name.includes("ekattor") ||
         name.includes("somoy") ||
@@ -39,7 +39,6 @@ function getCategory(name){
         return "News";
     }
 
-    // Sports
     if(
         name.includes("sports") ||
         name.includes("t sports") ||
@@ -54,7 +53,6 @@ function getCategory(name){
         return "Sports";
     }
 
-    // Movies
     if(
         name.includes("movie") ||
         name.includes("movies") ||
@@ -66,7 +64,6 @@ function getCategory(name){
         return "Movies";
     }
 
-    // Entertainment
     if(
         name.includes("zee") ||
         name.includes("star jalsha") ||
@@ -79,7 +76,6 @@ function getCategory(name){
         return "Entertainment";
     }
 
-    // Kids
     if(
         name.includes("cartoon") ||
         name.includes("pogo") ||
@@ -89,7 +85,6 @@ function getCategory(name){
         return "Kids";
     }
 
-    // Music
     if(
         name.includes("music") ||
         name.includes("9xm") ||
@@ -103,6 +98,62 @@ function getCategory(name){
 
 
 // ===============================
+// AUTO REAL TV LOGO
+// ===============================
+
+const TV_LOGOS = {
+
+    "ATN Bangla":"https://i.imgur.com/V4x7j5w.png",
+    "ATN News":"https://i.imgur.com/5YgVY7R.png",
+    "Somoy TV":"https://i.imgur.com/Jq2d8x5.png",
+    "Somoy tv":"https://i.imgur.com/Jq2d8x5.png",
+    "Jamuna TV":"https://i.imgur.com/OfA5rQx.png",
+    "Channel i":"https://i.imgur.com/oKQm5PB.png",
+    "GTV":"https://i.imgur.com/Lt1To4d.png",
+    "RTV":"https://i.imgur.com/0jP1LhS.png",
+    "NTV":"https://i.imgur.com/LfA7WgI.png",
+    "Independent TV":"https://i.imgur.com/FoK3AqP.png",
+    "BanglaVision":"https://i.imgur.com/oP8z6Qm.png",
+
+    "Star Jalsha":"https://i.imgur.com/V7CzvAQ.png",
+    "Zee Bangla":"https://i.imgur.com/JWl4qfQ.png",
+    "Colors Bangla":"https://i.imgur.com/VgKc2sP.png",
+
+    "Star Sports":"https://i.imgur.com/J0Yo9m5.png",
+    "T Sports":"https://i.imgur.com/FQjzY9d.png",
+    "PTV Sports":"https://i.imgur.com/MhSmMcb.png",
+    "beIN Sport":"https://i.imgur.com/ck9vAJh.png",
+    "beIN Sports":"https://i.imgur.com/ck9vAJh.png",
+
+    "Sony Sports 1":"https://i.imgur.com/q4ULY6F.png",
+    "Sony Sports 2":"https://i.imgur.com/q4ULY6F.png",
+    "Sony Sports 3":"https://i.imgur.com/q4ULY6F.png",
+
+    "Cartoon Network":"https://i.imgur.com/7E9O0Zx.png",
+    "Nick":"https://i.imgur.com/3XvL1yK.png",
+    "Pogo":"https://i.imgur.com/KnNn8hQ.png",
+    "Disney":"https://i.imgur.com/yPQXGGu.png"
+
+};
+
+
+// ===============================
+// GET LOGO
+// ===============================
+
+function autoLogo(name){
+
+    let key = Object.keys(TV_LOGOS).find(item =>
+        item.toLowerCase() === name.toLowerCase()
+    );
+
+    if(key){
+        return TV_LOGOS[key];
+    }
+
+    return "https://via.placeholder.com/120x120/111827/FFFFFF?text=TV";
+}
+// ===============================
 // LOAD PLAYLIST
 // ===============================
 
@@ -112,39 +163,50 @@ fetch(playlist)
 
     let lines = data.split("\n");
     let channels = [];
-        for (let i = 0; i < lines.length; i++) {
 
-        if (lines[i].startsWith("#EXTINF")) {
+    for (let i = 0; i < lines.length; i++) {
 
-            let ext = lines[i];
+        if (!lines[i].startsWith("#EXTINF")) continue;
 
-            let name = ext.split(",")[1]?.trim() || "Unknown";
+        let ext = lines[i];
 
-            let logoMatch = ext.match(/tvg-logo="(.*?)"/);
+        // Channel Name
+        let name = ext.split(",")[1]?.trim() || "Unknown";
 
-let logo = logoMatch && logoMatch[1]
-    ? logoMatch[1]
-    : autoLogo(name);
+        // tvg-logo
+        let logoMatch = ext.match(/tvg-logo="(.*?)"/);
 
-            let url = (lines[i + 1] || "").trim();
+        let logo = "";
 
-            let category = getCategory(name);
+        if (
+            logoMatch &&
+            logoMatch[1] &&
+            logoMatch[1].trim() !== ""
+        ) {
+            logo = logoMatch[1];
+        } else {
+            logo = autoLogo(name);
+        }
 
-            if (url && !url.startsWith("#")) {
+        // Stream URL
+        let url = (lines[i + 1] || "").trim();
 
-                channels.push({
-                    name: name,
-                    logo: logo,
-                    url: url,
-                    category: category
-                });
+        if (!url || url.startsWith("#")) continue;
 
-                if (!categories.includes(category)) {
-                    categories.push(category);
-                }
+        // Category
+        let category = getCategory(name);
 
-            }
+        channels.push({
 
+            name,
+            logo,
+            url,
+            category
+
+        });
+
+        if (!categories.includes(category)) {
+            categories.push(category);
         }
 
     }
@@ -152,89 +214,92 @@ let logo = logoMatch && logoMatch[1]
     // =========================
     // CUSTOM CHANNELS
     // =========================
-    
 
     const customChannels = [
 
         {
             name: "PTV Sports",
-            logo: "https://en.wikipedia.org/wiki/PTV_Sports",
+            logo: autoLogo("PTV Sports"),
             url: "http://172.20.21.22/live/skyfeed1015/index.m3u8"
         },
 
         {
-            name: "Somoy tv",
-            logo: "https://en.wikipedia.org/wiki/Somoy_TV",
+            name: "Somoy TV",
+            logo: autoLogo("Somoy TV"),
             url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8"
         },
-        
+
         {
-            name: "Somoy tv 2",
-            logo: "https://en.wikipedia.org/wiki/Somoy_TV",
+            name: "Somoy TV 2",
+            logo: autoLogo("Somoy TV"),
             url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/playlist.m3u8"
         },
-        
-        
 
         {
             name: "Bioscope FIFA",
-            logo: "https://via.placeholder.com/100?text=FIFA",
+            logo: autoLogo("FIFA"),
             url: "https://sm-monirul.top/ott/bioscope/index.m3u8"
         },
 
         {
             name: "DAZN 1",
-            logo: "https://via.placeholder.com/100?text=DAZN",
+            logo: autoLogo("DAZN"),
             url: "https://znty.dyndns.org:5010/hls/eleven1.m3u8"
         },
 
         {
             name: "Caze TV BR",
-            logo: "https://via.placeholder.com/100?text=Caze",
+            logo: autoLogo("Caze TV"),
             url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/1080p-vtt/index.m3u8"
         },
 
         {
             name: "beIN Sport",
-            logo: "https://via.placeholder.com/100?text=beIN",
+            logo: autoLogo("beIN Sport"),
             url: "https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8"
         }
 
     ];
-customChannels.forEach(ch => {
 
-    ch.category = getCategory(ch.name);
+    customChannels.forEach(ch => {
 
-    channels.push(ch);
+        ch.category = getCategory(ch.name);
 
-    if (!categories.includes(ch.category)) {
-        categories.push(ch.category);
-    }
+        channels.push(ch);
 
-});
+        if (!categories.includes(ch.category)) {
+            categories.push(ch.category);
+        }
 
-allChannels = channels;
+    });
 
-categories.sort();
+    allChannels = channels;
 
-renderCategories();
+    categories.sort();
 
-const savedCategory = localStorage.getItem("selectedCategory");
+    renderCategories();
 
-if (savedCategory && savedCategory !== "All") {
+    const savedCategory =
+        localStorage.getItem("selectedCategory");
 
-    currentCategory = savedCategory;
+    if (
+        savedCategory &&
+        savedCategory !== "All"
+    ) {
 
-    const btn = [...document.querySelectorAll(".cat-btn")]
+        currentCategory = savedCategory;
+
+        const btn =
+        [...document.querySelectorAll(".cat-btn")]
         .find(b => b.textContent.trim() === savedCategory);
 
-    filterCategory(savedCategory, btn);
+        filterCategory(savedCategory, btn);
 
-} else {
+    } else {
 
-    showChannels(allChannels);
+        showChannels(allChannels);
 
-}
+    }
 
 })
 .catch(() => {
@@ -243,7 +308,7 @@ if (savedCategory && savedCategory !== "All") {
     "<h3 style='color:red;padding:20px'>Failed to load playlist</h3>";
 
 });
-        // ===============================
+// ===============================
 // CATEGORY BAR
 // ===============================
 
@@ -254,18 +319,20 @@ function renderCategories(){
     `;
 
     html += `
-    <button class="cat-btn active"
-    onclick="filterCategory('All',this)">
-    All
+    <button
+        class="cat-btn active"
+        onclick="filterCategory('All',this)">
+        All
     </button>
     `;
 
     categories.forEach(cat=>{
 
         html += `
-        <button class="cat-btn"
-        onclick="filterCategory('${cat}',this)">
-        ${cat}
+        <button
+            class="cat-btn"
+            onclick="filterCategory('${cat}',this)">
+            ${cat}
         </button>
         `;
 
@@ -280,46 +347,38 @@ function renderCategories(){
 }
 
 
-
 // ===============================
 // CATEGORY FILTER
 // ===============================
 
 function filterCategory(category,btn){
 
-    localStorage.setItem("selectedCategory", category);
+    currentCategory = category;
+
+    localStorage.setItem("selectedCategory",category);
 
     document.querySelectorAll(".cat-btn")
-    .forEach(item=>{
-
-        item.classList.remove("active");
-
-    });
+    .forEach(item=>item.classList.remove("active"));
 
     if(btn){
-
         btn.classList.add("active");
-
     }
 
     if(category==="All"){
 
         showChannels(allChannels);
-
         return;
 
     }
 
-    let filtered =
-    allChannels.filter(ch=>{
-
-        return ch.category===category;
-
-    });
+    const filtered =
+    allChannels.filter(ch=>ch.category===category);
 
     showChannels(filtered);
 
 }
+
+
 // ===============================
 // SHOW CHANNELS
 // ===============================
@@ -335,10 +394,14 @@ function showChannels(channels){
         onclick="openPlayer('${encodeURIComponent(ch.url)}','${encodeURIComponent(ch.name)}')">
 
             <img
-            class="channel-logo"
-            src="${ch.logo}"
-            loading="lazy"
-            onerror="this.src='https://via.placeholder.com/100?text=TV'">
+                class="channel-logo"
+                src="${ch.logo}"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="
+                    this.onerror=null;
+                    this.src=autoLogo('${ch.name}');
+                ">
 
             <div class="channel-name">
                 ${ch.name}
@@ -354,8 +417,6 @@ function showChannels(channels){
     document.getElementById("channelList").innerHTML = html;
 
 }
-
-
 // ===============================
 // PLAYER
 // ===============================
@@ -363,7 +424,7 @@ function showChannels(channels){
 function openPlayer(url,name){
 
     window.location.href =
-    "player.html?url=" + url + "&name=" + name;
+        "player.html?url=" + url + "&name=" + name;
 
 }
 
@@ -375,10 +436,11 @@ function openPlayer(url,name){
 document.getElementById("searchBox")
 .addEventListener("keyup",function(){
 
-    let input = this.value.toLowerCase();
+    let input = this.value.toLowerCase().trim();
 
-    let list = allChannels;
+    let list = [...allChannels];
 
+    // Category Filter
     if(currentCategory !== "All"){
 
         list = list.filter(ch =>
@@ -387,10 +449,94 @@ document.getElementById("searchBox")
 
     }
 
-    list = list.filter(ch =>
-        ch.name.toLowerCase().includes(input)
+    // Search Filter
+    if(input){
+
+        list = list.filter(ch =>
+            ch.name.toLowerCase().includes(input)
+        );
+
+    }
+
+    // A-Z Sort
+    list.sort((a,b)=>
+        a.name.localeCompare(b.name)
     );
 
     showChannels(list);
 
 });
+
+
+// ===============================
+// REMOVE DUPLICATE CHANNELS
+// ===============================
+
+function removeDuplicateChannels(){
+
+    const map = new Map();
+
+    allChannels.forEach(ch=>{
+
+        const key =
+        ch.name.toLowerCase().trim();
+
+        if(!map.has(key)){
+
+            map.set(key,ch);
+
+        }
+
+    });
+
+    allChannels =
+    [...map.values()];
+
+}
+
+
+// ===============================
+// SORT CHANNELS
+// ===============================
+
+function sortChannels(){
+
+    allChannels.sort((a,b)=>
+        a.name.localeCompare(b.name)
+    );
+
+}
+
+
+// ===============================
+// CACHE LOGOS
+// ===============================
+
+function cacheLogos(){
+
+    allChannels.forEach(ch=>{
+
+        const img = new Image();
+
+        img.src = ch.logo;
+
+    });
+
+}
+
+
+// ===============================
+// INITIALIZE
+// ===============================
+
+setTimeout(()=>{
+
+    removeDuplicateChannels();
+
+    sortChannels();
+
+    cacheLogos();
+
+    showChannels(allChannels);
+
+},100);
