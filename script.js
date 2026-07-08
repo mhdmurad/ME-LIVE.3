@@ -122,9 +122,9 @@ fetch(playlist)
 
             let logoMatch = ext.match(/tvg-logo="(.*?)"/);
 
-            let logo = logoMatch && logoMatch[1]
+let logo = logoMatch && logoMatch[1]
     ? logoMatch[1]
-    : "https://raw.githubusercontent.com/mhdmurad/logo/main/file_000000001b38722fb3d3118c5605fb7b.png";
+    : autoLogo(name);
 
             let url = (lines[i + 1] || "").trim();
 
