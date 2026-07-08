@@ -7,8 +7,6 @@ https://byphdgllyk.gpcdn.net/hls/deeptotv/0_1/index.m3u8
 https://stream.ottplus.live/live/zee_bangla_cinema_abr/live/zee_bangla_cinema_720/playlist.m3u8
 #EXTINF:-1,STAR JALSHA
 https://xfireflix.my.id/mac.php
-#EXTINF:-1,ZEE BNGLA
-https://stream.ottplus.live/live/zee_bangla_abr/index.m3u8
 #EXTINF:-1,Thikana
 https://5dd3981940faa.streamlock.net:443/thikanatv/thikanatv/playlist.m3u8
 #EXTINF:-1,ORANGE BNGLA TV
@@ -17,8 +15,6 @@ https://cdn-4.pishow.tv/live/1499/1499_2.m3u8
 https://live-bangla.akamaized.net/liveabr/playlist.m3u8
 #EXTINF:-1,DD-bngla
 https://cdn-4.pishow.tv/live/37/37_2.m3u8
-#EXTINF:-1,42.Sony Aath
-https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1,Sangeet Bangla
 https://cdn-4.pishow.tv/live/1143/master.m3u8
 #EXTINF:-1,Hi-dosti
@@ -35,10 +31,6 @@ https://live-bhojpuri.akamaized.net/liveabr/pub-iobhojpuqbu6yj/live_360p/chunks.
 https://padmaonline.duckdns.org:8088/pcv/index.m3u8
 #EXTINF:-1,Tara TV
 https://legitpro.co.in/taratv/taratv/tracks-v1a1/mono.m3u8
-#EXTINF:-1,ZEE Tv
-https://stream.ottplus.live/live/zee_tv_hd_abr/index.m3u8
-#EXTINF:-1,AND TV
-https://stream.ottplus.live/live/and_tv_hd_abr/index.m3u8
 #EXTINF:-1,ZEE ONE
 https://amg17931-zee-amg17931c6-samsung-au-8872.playouts.now.amagi.tv/playlist/amg17931-asiatvusaltdfast-zeeworld-samsungau/playlist.m3u8
 #EXTINF:-1,PK
@@ -237,8 +229,6 @@ https://tv.cdn.xsg.ge/gpb-2tv/tracks-v1a1/mono.ts.m3u8
 https://stream.ottplus.bd/live/euro_sports_hd_abr/live/euro_sports_hd/chunks.m3u8
 #EXTINF:-1,Star Jalsha
 https://yupptvcatchupire.yuppcdn.net/preview/starjalsha/1800.m3u8
-#EXTINF:-1,South India Movie
-https://live20.bozztv.com/giatvplayout7/giatv-209593/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1,Cricket Gold
 https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/bfc6a36e-c250-4afe-b6c9-2bc57855bb7d/4.m3u8
 #EXTINF:-1,G Series Drama
