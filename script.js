@@ -3,7 +3,7 @@
 // ===============================
 
 const playlist =
-"https://raw.githubusercontent.com/shouravoo8/Tv-Channels-Network/refs/heads/main/TvChannelsnetwork.m3u";
+"https://raw.githubusercontent.com/mhdmurad/ME-LIVE.3/refs/heads/main/active.m3u";
 
 let allChannels = [];
 let currentCategory = "All";
@@ -162,18 +162,10 @@ fetch(playlist)
         },
 
         {
-            name: "Somoy tv",
-            logo: "https://en.wikipedia.org/wiki/Somoy_TV",
-            url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8"
+            name: "Bein Sports 4 Arabic",
+            logo: "https://via.placeholder.com/100?text=BeIN",
+            url: "https://cp11.adabmedia.com/hls2/sport.m3u8?nocache=1782057214460"
         },
-        
-        {
-            name: "Somoy tv 2",
-            logo: "https://en.wikipedia.org/wiki/Somoy_TV",
-            url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/playlist.m3u8"
-        },
-        
-        
 
         {
             name: "Bioscope FIFA",
